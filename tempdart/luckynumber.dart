@@ -28,9 +28,12 @@ class LuckyNumber {
     int guessNum = 0;
     int lives = 8;
 
+    // Welcome
+    print("==== Lucky Number ====");
+
     // Generate random number
     int rndNum = random.nextInt(100);
-    print(rndNum);
+    print("Current num: $rndNum"); // for debugging/checking purposes; to be removed
 
     // Ask for input
     do {
