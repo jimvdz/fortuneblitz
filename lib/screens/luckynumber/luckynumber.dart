@@ -221,13 +221,17 @@ class _LuckyNumberState extends State<LuckyNumber> {
             Card(
               child: Container(
                 width: (MediaQuery.of(context).size.width - 40) * 0.7,
-                padding: EdgeInsets.all(24),
+                padding: EdgeInsets.all(16),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   spacing: 20,
                   children: [
-                    Text(
-                      'You won 75 points!',
-                      style: theme.textTheme.bodyLarge
+                    Center(
+                      child: Text(
+                        'You won 75 points!',
+                        style: theme.textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     FilledButton(
                       onPressed: () => {print("Play again button clicked")},
