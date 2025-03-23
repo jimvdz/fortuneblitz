@@ -12,7 +12,7 @@ final ThemeData myTheme = ThemeData(
     onPrimary: Colors.white,
     secondary: const Color(0xFF40317A),
     onSecondary: Colors.white,
-    tertiary: const Color(0xFFC1B1FF), // Text card container color
+    tertiary: const Color(0xFFC1B1FF), // Winning number/text container color
     onTertiary: const Color(0xFF15131C), // Text on text card container
     surface: const Color(0xFF15131C), // App background color
     onSurface: Colors.white,
@@ -28,9 +28,9 @@ final ThemeData myTheme = ThemeData(
   ),
   textTheme: TextTheme(
     displayLarge: nunitoBoldTextStyle.copyWith(fontSize: 72), // Winning number
-    headlineLarge: nunitoBoldTextStyle.copyWith(fontSize: 36), // Game title
-    bodyLarge: nunitoBoldTextStyle.copyWith(fontSize: 24), // Button text / Normal text
-    bodyMedium: nunitoBoldTextStyle.copyWith(fontSize: 20), // Hint card text
+    headlineLarge: nunitoBoldTextStyle.copyWith(fontSize: 40), // Home page score
+    bodyLarge: nunitoBoldTextStyle.copyWith(fontSize: 24), // Game title (Find the right color, etc.) / Home Title
+    bodyMedium: nunitoBoldTextStyle.copyWith(fontSize: 20), // Button text / Normal text / Hint card text
     bodySmall: nunitoBoldTextStyle.copyWith(fontSize: 16), // Credits page text
     titleLarge: nunitoBoldTextStyle, // App bar
   ),
