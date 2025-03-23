@@ -1,4 +1,4 @@
-// Made with <3 by Jimwel Valdez (jimvdz). Copyright (c) 2025. All rights reserved.
+// Made with <3 by Jimwel L. Valdez (jimvdz). Copyright (c) 2025. All rights reserved.
 // Will contain yung colors to be used sa app
 
 import 'package:flutter/material.dart';
@@ -13,15 +13,15 @@ final ThemeData myTheme = ThemeData(
     secondary: const Color(0xFF40317A),
     onSecondary: Colors.white,
     tertiary: const Color(0xFFC1B1FF), // Text card container color
-    onTertiary: const Color(0xFF1E1E1E), // Text on text card container
-    surface: const Color(0xFF1E1E1E), // App background color
+    onTertiary: const Color(0xFF15131C), // Text on text card container
+    surface: const Color(0xFF15131C), // App background color
     onSurface: Colors.white,
     surfaceContainerHighest: const Color(0xFF1C182D), // Card background color
     onSurfaceVariant: Colors.white,
     error: Colors.redAccent,
     onError: Colors.white,
   ),
-  scaffoldBackgroundColor: const Color(0xFF1E1E1E),
+  scaffoldBackgroundColor: const Color(0xFF15131C),
   cardTheme: const CardTheme(
     color: Color(0xFF1C182D),
     shadowColor: Colors.black45,
