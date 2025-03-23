@@ -1,6 +1,7 @@
 // Credits page made with <3 by Jimwel L. Valdez. Copyright (c) 2025. All rights reserved.
 
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/screens/credits/peoplecards.dart';
 import 'package:get/get.dart';
 
 class Credits extends StatelessWidget {
@@ -17,13 +18,9 @@ class Credits extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              size: 24,
-              color: Colors.white,
-            ),
+            icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
-              print("Credits clicked");
+              print("Back button clicked");
               Get.back();
             },
             style: IconButton.styleFrom(
@@ -35,29 +32,28 @@ class Credits extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            spacing: 48,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // Points sa taas ng screen
-              Container(
-                margin: const EdgeInsets.only(top: 56),
-                child: Column(
-                  spacing: 8,
-                  children: [
-                    Text('CREDITS', style: theme.textTheme.bodyLarge),
-                    Text(
-                      '19999',
-                      style: theme.textTheme.headlineLarge?.copyWith(
-                        color: theme.colorScheme.tertiary,
-                      ),
-                    ),
-                  ],
-                ),
+        child: Column(
+          spacing: 48,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+
+            // Screen title
+            Container(
+              margin: const EdgeInsets.only(top: 56, left: 20, right: 20),
+              child: Column(
+                spacing: 8,
+                children: [
+                  Text('GAME DEVELOPERS', style: theme.textTheme.bodyLarge),
+                ],
               ),
-            ],
-          ),
+            ),
+
+            // To contain yung people cards
+            Container(
+                margin: const EdgeInsets.only(bottom: 56, left: 20, right: 20),
+                child: PeopleCards(),
+              ),
+          ],
         ),
       ),
     );
