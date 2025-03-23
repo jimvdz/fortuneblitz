@@ -22,47 +22,53 @@ class GameCards extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Column(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.0),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: Image.asset(
-                      'images/placeholder.jpg',
-                      fit: BoxFit.cover,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: theme.colorScheme.tertiary.withAlpha(30),
+              onTap: () {
+                debugPrint('Card tapped.');
+              },
+              child: Column(
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(8.0),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: Image.asset(
+                        'images/placeholder.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Text('Jack en Poy', style: theme.textTheme.bodyMedium),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    width: double.infinity, 
-                    child: FilledButton(
-                      onPressed: () => {print("Play button clicked")},
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                  Text('Jack en Poy', style: theme.textTheme.bodyMedium),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: () => {print("Play button clicked")},
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12.0),
                           ),
                         ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: 12.0),
-                        ),
+                        child: Icon(Icons.play_arrow, size: 24),
                       ),
-                      child: Icon(Icons.play_arrow,
-                      size: 24),
                     ),
                   ),
-                ),
-                SizedBox(height: 2),
-              ],
+                  SizedBox(height: 2),
+                ],
+              ),
             ),
           ),
         ),
@@ -74,47 +80,53 @@ class GameCards extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Column(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.0),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: Image.asset(
-                      'images/placeholder.jpg',
-                      fit: BoxFit.cover,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: theme.colorScheme.tertiary.withAlpha(30),
+              onTap: () {
+                debugPrint('Card tapped.');
+              },
+              child: Column(
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(8.0),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: Image.asset(
+                        'images/placeholder.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Text('Lucky Number', style: theme.textTheme.bodyMedium),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    width: double.infinity, 
-                    child: FilledButton(
-                      onPressed: () => {print("Play button clicked")},
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                  Text('Lucky Number', style: theme.textTheme.bodyMedium),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: () => {print("Play button clicked")},
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12.0),
                           ),
                         ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: 12.0),
-                        ),
+                        child: Icon(Icons.play_arrow, size: 24),
                       ),
-                      child: Icon(Icons.play_arrow,
-                      size: 24),
                     ),
                   ),
-                ),
-                SizedBox(height: 2),
-              ],
+                  SizedBox(height: 2),
+                ],
+              ),
             ),
           ),
         ),
@@ -126,47 +138,53 @@ class GameCards extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Column(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.0),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: Image.asset(
-                      'images/placeholder.jpg',
-                      fit: BoxFit.cover,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: theme.colorScheme.tertiary.withAlpha(30),
+              onTap: () {
+                debugPrint('Card tapped.');
+              },
+              child: Column(
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(8.0),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: Image.asset(
+                        'images/placeholder.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Text('Lotto', style: theme.textTheme.bodyMedium),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    width: double.infinity, 
-                    child: FilledButton(
-                      onPressed: () => {print("Play button clicked")},
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                  Text('Lotto', style: theme.textTheme.bodyMedium),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: () => {print("Play button clicked")},
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12.0),
                           ),
                         ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: 12.0),
-                        ),
+                        child: Icon(Icons.play_arrow, size: 24),
                       ),
-                      child: Icon(Icons.play_arrow,
-                      size: 24),
                     ),
                   ),
-                ),
-                SizedBox(height: 2),
-              ],
+                  SizedBox(height: 2),
+                ],
+              ),
             ),
           ),
         ),
@@ -178,47 +196,53 @@ class GameCards extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Column(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.0),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: Image.asset(
-                      'images/placeholder.jpg',
-                      fit: BoxFit.cover,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: theme.colorScheme.tertiary.withAlpha(30),
+              onTap: () {
+                debugPrint('Card tapped.');
+              },
+              child: Column(
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(8.0),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: Image.asset(
+                        'images/placeholder.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Text('Color Game', style: theme.textTheme.bodyMedium),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    width: double.infinity, 
-                    child: FilledButton(
-                      onPressed: () => {print("Play button clicked")},
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                  Text('Color Game', style: theme.textTheme.bodyMedium),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: () => {print("Play button clicked")},
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12.0),
                           ),
                         ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: 12.0),
-                        ),
+                        child: Icon(Icons.play_arrow, size: 24),
                       ),
-                      child: Icon(Icons.play_arrow,
-                      size: 24),
                     ),
                   ),
-                ),
-                SizedBox(height: 2),
-              ],
+                  SizedBox(height: 2),
+                ],
+              ),
             ),
           ),
         ),
@@ -230,47 +254,53 @@ class GameCards extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Column(
-              spacing: 8,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.0),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: Image.asset(
-                      'images/placeholder.jpg',
-                      fit: BoxFit.cover,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: theme.colorScheme.tertiary.withAlpha(30),
+              onTap: () {
+                debugPrint('Card tapped.');
+              },
+              child: Column(
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(8.0),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: Image.asset(
+                        'images/placeholder.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Text('Slot Machine', style: theme.textTheme.bodyMedium),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  child: SizedBox(
-                    width: double.infinity, 
-                    child: FilledButton(
-                      onPressed: () => {print("Play button clicked")},
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                  Text('Slot Machine', style: theme.textTheme.bodyMedium),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: () => {print("Play button clicked")},
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 12.0),
                           ),
                         ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: 12.0),
-                        ),
+                        child: Icon(Icons.play_arrow, size: 24),
                       ),
-                      child: Icon(Icons.play_arrow,
-                      size: 24),
                     ),
                   ),
-                ),
-                SizedBox(height: 2),
-              ],
+                  SizedBox(height: 2),
+                ],
+              ),
             ),
           ),
         ),
