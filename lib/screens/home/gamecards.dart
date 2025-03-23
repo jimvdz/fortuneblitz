@@ -1,6 +1,8 @@
 // Game cards made with <3 by Jimwel L. Valdez (jimvdz). Copyright (c) 2025. All rights reserved.
 
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/screens/luckynumber/luckynumber.dart';
+import 'package:get/get.dart';
 
 class GameCards extends StatelessWidget {
   const GameCards({super.key});
@@ -11,12 +13,12 @@ class GameCards extends StatelessWidget {
     final theme = Theme.of(context);
 
     // List game data para maiwasan repetitive code
-    final List<Map<String, String>> games = [
-      {"title": "Jack en Poy", "image": "images/placeholder.jpg"},
-      {"title": "Lucky Number", "image": "images/placeholder.jpg"},
-      {"title": "Lotto", "image": "images/placeholder.jpg"},
-      {"title": "Color Game", "image": "images/placeholder.jpg"},
-      {"title": "Slot Machine", "image": "images/placeholder.jpg"},
+    final List<Map<String, dynamic>> games = [
+      {"title": "Jack en Poy", "image": "images/placeholder.jpg", "page": LuckyNumber()},
+      {"title": "Lucky Number", "image": "images/placeholder.jpg", "page": LuckyNumber()},
+      {"title": "Lotto", "image": "images/placeholder.jpg", "page": LuckyNumber()},
+      {"title": "Color Game", "image": "images/placeholder.jpg", "page": LuckyNumber()},
+      {"title": "Slot Machine", "image": "images/placeholder.jpg", "page": LuckyNumber()},
     ];
 
     return Wrap(
@@ -37,6 +39,8 @@ class GameCards extends StatelessWidget {
               splashColor: theme.colorScheme.tertiary.withAlpha(30),
               onTap: () {
                 debugPrint('${game["title"]} card tapped');
+                final Widget nextPage = game["page"];
+                Get.to(() => nextPage);
               },
               child: Column(
                 spacing: 8,
@@ -67,7 +71,11 @@ class GameCards extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: FilledButton(
-                        onPressed: () => {print("${game["title"]} Play button clicked")},
+                        onPressed: () {
+                          print("${game["title"]} Play button clicked");
+                          final Widget nextPage = game["page"];
+                          Get.to(() => nextPage);
+                        },
                         style: ButtonStyle(
                           shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
