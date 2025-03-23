@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fortuneblitz/screens/home/gamecards.dart';
+import 'package:fortuneblitz/screens/credits/credits.dart';
+import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -34,6 +36,7 @@ class _HomeState extends State<Home> {
             ),
             onPressed: () {
               print("Credits clicked");
+              Get.to(() => const Credits());
             },
             style: IconButton.styleFrom(
               backgroundColor: theme.colorScheme.secondary,
