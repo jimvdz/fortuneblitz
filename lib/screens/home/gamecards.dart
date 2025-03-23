@@ -7,16 +7,26 @@ class GameCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Get yung theme sa current build
+    // Get yung theme sa current build
+    final theme = Theme.of(context);
+
+    // List game data para maiwasan repetitive code
+    final List<Map<String, String>> games = [
+      {"title": "Jack en Poy", "image": "images/placeholder.jpg"},
+      {"title": "Lucky Number", "image": "images/placeholder.jpg"},
+      {"title": "Lotto", "image": "images/placeholder.jpg"},
+      {"title": "Color Game", "image": "images/placeholder.jpg"},
+      {"title": "Slot Machine", "image": "images/placeholder.jpg"},
+    ];
 
     return Wrap(
       spacing: 12,
       runSpacing: 12,
       alignment: WrapAlignment.center,
-      children: [
 
-        // Jack en Poy
-        SizedBox(
+      // Dito mag-iterate para iisang template lang and no repetitive codes
+      children: games.map((game) {
+        return SizedBox(
           width: (MediaQuery.of(context).size.width - 40 - 12) / 2,
           child: Card(
             shape: RoundedRectangleBorder(
@@ -26,12 +36,14 @@ class GameCards extends StatelessWidget {
             child: InkWell(
               splashColor: theme.colorScheme.tertiary.withAlpha(30),
               onTap: () {
-                debugPrint('Card tapped.');
+                debugPrint('${game["title"]} card tapped');
               },
               child: Column(
                 spacing: 8,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+
+                  // Game image
                   ClipRRect(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(8.0),
@@ -40,18 +52,22 @@ class GameCards extends StatelessWidget {
                       width: double.infinity,
                       height: 150,
                       child: Image.asset(
-                        'images/placeholder.jpg',
+                        '${game["image"]}',
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  Text('Jack en Poy', style: theme.textTheme.bodyMedium),
+
+                  // Game title
+                  Text('${game["title"]}', style: theme.textTheme.bodyMedium),
+
+                  // Play button
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8),
                     child: SizedBox(
                       width: double.infinity,
                       child: FilledButton(
-                        onPressed: () => {print("Play button clicked")},
+                        onPressed: () => {print("${game["title"]} Play button clicked")},
                         style: ButtonStyle(
                           shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
@@ -71,240 +87,8 @@ class GameCards extends StatelessWidget {
               ),
             ),
           ),
-        ),
-
-        // Lucky Number
-        SizedBox(
-          width: (MediaQuery.of(context).size.width - 40 - 12) / 2,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: InkWell(
-              splashColor: theme.colorScheme.tertiary.withAlpha(30),
-              onTap: () {
-                debugPrint('Card tapped.');
-              },
-              child: Column(
-                spacing: 8,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(8.0),
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: Image.asset(
-                        'images/placeholder.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Text('Lucky Number', style: theme.textTheme.bodyMedium),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: () => {print("Play button clicked")},
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          padding: WidgetStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 12.0),
-                          ),
-                        ),
-                        child: Icon(Icons.play_arrow, size: 24),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                ],
-              ),
-            ),
-          ),
-        ),
-
-        // Lotto
-        SizedBox(
-          width: (MediaQuery.of(context).size.width - 40 - 12) / 2,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: InkWell(
-              splashColor: theme.colorScheme.tertiary.withAlpha(30),
-              onTap: () {
-                debugPrint('Card tapped.');
-              },
-              child: Column(
-                spacing: 8,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(8.0),
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: Image.asset(
-                        'images/placeholder.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Text('Lotto', style: theme.textTheme.bodyMedium),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: () => {print("Play button clicked")},
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          padding: WidgetStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 12.0),
-                          ),
-                        ),
-                        child: Icon(Icons.play_arrow, size: 24),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                ],
-              ),
-            ),
-          ),
-        ),
-
-        // Color Game
-        SizedBox(
-          width: (MediaQuery.of(context).size.width - 40 - 12) / 2,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: InkWell(
-              splashColor: theme.colorScheme.tertiary.withAlpha(30),
-              onTap: () {
-                debugPrint('Card tapped.');
-              },
-              child: Column(
-                spacing: 8,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(8.0),
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: Image.asset(
-                        'images/placeholder.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Text('Color Game', style: theme.textTheme.bodyMedium),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: () => {print("Play button clicked")},
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          padding: WidgetStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 12.0),
-                          ),
-                        ),
-                        child: Icon(Icons.play_arrow, size: 24),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                ],
-              ),
-            ),
-          ),
-        ),
-
-        // Slot Machine
-        SizedBox(
-          width: (MediaQuery.of(context).size.width - 40 - 12) / 2,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: InkWell(
-              splashColor: theme.colorScheme.tertiary.withAlpha(30),
-              onTap: () {
-                debugPrint('Card tapped.');
-              },
-              child: Column(
-                spacing: 8,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(8.0),
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: Image.asset(
-                        'images/placeholder.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Text('Slot Machine', style: theme.textTheme.bodyMedium),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: () => {print("Play button clicked")},
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          padding: WidgetStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 12.0),
-                          ),
-                        ),
-                        child: Icon(Icons.play_arrow, size: 24),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
+        );
+      }).toList(),
     );
   }
 }
