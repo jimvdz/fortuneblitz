@@ -66,7 +66,9 @@ class _HomeState extends State<Home> {
                     Obx(() {
                       return Text(
                         '${gameController.totalPoints.value}',
-                        style: theme.textTheme.headlineLarge,
+                        style: theme.textTheme.headlineLarge?.copyWith(
+                          color: theme.colorScheme.tertiary
+                        ),
                       );
                     }),
                     SizedBox(height: 4), // for spacing kasi may leading yung texts
