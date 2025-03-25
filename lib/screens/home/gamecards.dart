@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fortuneblitz/screens/colorgame/colorgame.dart';
 import 'package:fortuneblitz/screens/luckynumber/luckynumber.dart';
 import 'package:fortuneblitz/screens/slotmachine/slotmachine.dart';
+import 'package:fortuneblitz/screens/jackenpoy/jackenpoy.dart';
+import 'package:fortuneblitz/screens/lotto/lotto.dart';
 import 'package:get/get.dart';
 
 class GameCards extends StatelessWidget {
@@ -19,7 +21,7 @@ class GameCards extends StatelessWidget {
       {
         "title": "Jack en Poy",
         "image": "images/placeholder.jpg",
-        "page": LuckyNumber(),
+        "page": Jackenpoy(),
       },
       {
         "title": "Lucky Number",
@@ -29,7 +31,7 @@ class GameCards extends StatelessWidget {
       {
         "title": "Lotto",
         "image": "images/placeholder.jpg",
-        "page": LuckyNumber(),
+        "page": Lotto(),
       },
       {
         "title": "Color Game",
