@@ -13,22 +13,22 @@ class PeopleCards extends StatelessWidget {
     final List<Map<String, String>> people = [
       {
         "name": "JIMWEL L. VALDEZ",
-        "image": "images/placeholder.jpg",
+        "image": "images/valdez.jpg",
         "role": "Project Lead, Game Developer, UI/UX Design",
       },
       {
         "name": "CHRISTINE JASLINE D. NATIVIDAD",
-        "image": "images/placeholder.jpg",
+        "image": "images/natividad.jpg",
         "role": "Game Developer, UI/UX Design",
       },
       {
         "name": "KATE ANNE S. DAVID",
-        "image": "images/placeholder.jpg",
+        "image": "images/david.jpg",
         "role": "Game Developer, UI/UX Design",
       },
       {
         "name": "CHESTER JONATHAN C. TAYAG",
-        "image": "images/placeholder.jpg",
+        "image": "images/tayag.jpg",
         "role": "Game Concept Designer, UI/UX Design",
       },
       {
@@ -78,7 +78,7 @@ class PeopleCards extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage('images/placeholder.jpg'),
+                              image: AssetImage('${person["image"]}'),
                               fit: BoxFit.cover,
                             ),
                           ),
