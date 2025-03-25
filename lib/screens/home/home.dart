@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fortuneblitz/screens/home/gamecards.dart';
 import 'package:fortuneblitz/screens/credits/credits.dart';
 import 'package:get/get.dart';
+import 'package:fortuneblitz/controller.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,6 +15,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
+  final GameController gameController = Get.put(GameController());
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); // Get yung theme sa current build
@@ -59,15 +63,18 @@ class _HomeState extends State<Home> {
                   spacing: 8,
                   children: [
                     Text('CURRENT POINTS', style: theme.textTheme.bodyLarge),
-                    Text(
-                      '19999',
-                      style: theme.textTheme.headlineLarge?.copyWith(
-                        color: theme.colorScheme.tertiary,
-                      ),
-                    ),
+                    Obx(() {
+                      return Text(
+                        '${gameController.totalPoints.value}',
+                        style: theme.textTheme.headlineLarge,
+                      );
+                    }),
                     SizedBox(height: 4), // for spacing kasi may leading yung texts
                     FilledButton(
-                      onPressed: () => {print("Reset score clicked")},
+                      onPressed: () {
+                        gameController.resetPoints();
+                        print("Reset score clicked");
+                      },
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
