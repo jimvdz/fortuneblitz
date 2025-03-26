@@ -40,19 +40,37 @@ class Credits extends StatelessWidget {
             // Screen title
             Container(
               margin: const EdgeInsets.only(top: 56, left: 20, right: 20),
-              child: Column(
-                spacing: 8,
-                children: [
-                  Text('GAME DEVELOPERS', style: theme.textTheme.bodyLarge),
-                ],
-              ),
+              child: Text('GAME DEVELOPERS', style: theme.textTheme.bodyLarge),
             ),
 
             // To contain yung people cards
             Container(
-                margin: const EdgeInsets.only(bottom: 56, left: 20, right: 20),
+                margin: const EdgeInsets.only(left: 20, right: 20),
                 child: PeopleCards(),
-              ),
+            ),
+
+            Container(
+              margin: const EdgeInsets.only(bottom: 56, left: 20, right: 20),
+              child: Column(
+                spacing: 12,
+                children: [
+                  Text(
+                    'Fortune Blitz is developed using Flutter.',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: Colors.white.withAlpha(180)
+                      ),
+                      textAlign: TextAlign.center,
+                  ),
+                  Text(
+                      'Copyright © 2025 by Valdez, Natividad, David, Tayag, Santiago, and Cayanan. All rights reserved.',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: Colors.white.withAlpha(180)
+                      ),
+                      textAlign: TextAlign.center,
+                  ),
+                ]
+              )
+            ),
           ],
         ),
       ),

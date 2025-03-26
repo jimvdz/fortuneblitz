@@ -20,27 +20,27 @@ class GameCards extends StatelessWidget {
     final List<Map<String, dynamic>> games = [
       {
         "title": "Jack en Poy",
-        "image": "images/placeholder.jpg",
+        "image": "images/games/jackenpoy.png",
         "page": Jackenpoy(),
       },
       {
         "title": "Lucky Number",
-        "image": "images/placeholder.jpg",
+        "image": "images/games/luckynumber.png",
         "page": LuckyNumber(),
       },
       {
         "title": "Lotto",
-        "image": "images/placeholder.jpg",
+        "image": "images/games/lotto.png",
         "page": Lotto(),
       },
       {
         "title": "Color Game",
-        "image": "images/placeholder.jpg",
+        "image": "images/games/colorgame.png",
         "page": ColorGame(),
       },
       {
         "title": "Slot Machine",
-        "image": "images/placeholder.jpg",
+        "image": "images/games/slotmachine.png",
         "page": SlotMachine(),
       },
     ];
