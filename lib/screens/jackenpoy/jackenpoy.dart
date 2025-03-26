@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:fortuneblitz/theme.dart";
 import "package:fortuneblitz/controller.dart";
+import 'dart:math';
 
 void main() {
   runApp(Jackenpoy());
@@ -22,41 +22,56 @@ class _JackenpoyState extends State<Jackenpoy> {
   String computerChoice = "?";
   int totalPoints = 0;
   int lives = 5;
+  int userWins = 0;
+  int computerWins = 0;
+  String gameResult = "";
+
   final Random random = Random();
 
   // Determines the winner
   String determineWinner(String user, String computer) {
-    if (user == computer) {
-      return "It's a Draw!";
-    } else if (
-        (user == "ROCK" && computer == "SCISSOR") ||
-        (user == "PAPER" && computer == "ROCK") ||
-        (user == "SCISSOR" && computer == "PAPER")) {
-      setState(() {
-        totalPoints+=50;
-      });
-      return "You Win!";
-    } else {
-      setState(() {
-        lives--;
-      });
-      return "You Lose";
-    }
+  if (user == computer) {
+    return "It's a Draw!";
+  } else if (
+      (user == "ROCK" && computer == "SCISSOR") ||
+      (user == "PAPER" && computer == "ROCK") ||
+      (user == "SCISSOR" && computer == "PAPER")) {
+    setState(() {
+      totalPoints += 50;
+      userWins++;
+      
+    });
+    return "You Win!";
+  } else {
+    setState(() {
+      computerWins++;
+      lives--;
+      if (computerWins==5){totalPoints =0;
+      }
+    });
+    return "You Lose!";
   }
+}
+
 
   // Handles the user's move
-  void playGame(String userSelection) {
-    setState(() {
-      userChoice = userSelection;
-      computerChoice = choices[random.nextInt(3)];
-      determineWinner(userChoice, computerChoice);
-    if (lives == 0) {
-      Future.delayed(Duration(milliseconds: 500), () {
-        showGameOverDialog();
-      });
+void playGame(String userSelection) {
+  setState(() {
+    userChoice = userSelection;
+    computerChoice = choices[random.nextInt(3)];
+    gameResult = determineWinner(userChoice, computerChoice);
+  });
+
+  
+
+  setState(() {
+    if (userWins == 5 || computerWins == 5) {
+      showGameOverDialog();
     }
   });
 }
+
+
 
 
 void showGameOverDialog() {
@@ -71,9 +86,8 @@ void showGameOverDialog() {
             children: [
               Center(
                 child: Text(
-                  totalPoints > 0
-                      ? 'You won $totalPoints points! ' 
-                      : 'Game Over! \n You won $totalPoints points',
+                  
+                  userWins == 5 ? 'You Win The Game! \n Your Total Points $totalPoints!' : 'Computer Wins The Game! \n$totalPoints Points',
                   style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -156,6 +170,8 @@ void showGameOverDialog() {
       userChoice = "?";
       computerChoice = "?";
       totalPoints = 0;
+      userWins = 0;
+      computerWins = 0;
       lives = 5;
     });
   }
@@ -194,7 +210,7 @@ void showGameOverDialog() {
                 children: [
                   SizedBox(height: 20.0),
                   
-                  // Computer's Choice
+              // Text("$userChoice vs $computerChoice", style: theme.textTheme.bodyLarge),
                   SizedBox(
                     height: 200.0,
                     width: 378.0,
@@ -271,8 +287,11 @@ void showGameOverDialog() {
                   ),
 
                   SizedBox(height: 50.0),
+                  Text(gameResult, style: theme.textTheme.bodyLarge),
 
-                      
+                      SizedBox(height: 20.0),
+                  Text("You $userWins :  Computer $computerWins", style: theme.textTheme.bodyMedium),
+                  SizedBox(height: 20),
 
                       Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
 

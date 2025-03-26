@@ -27,7 +27,8 @@ class _LottoState extends State<Lotto> {
       
       // If user wins, add points
       if (userNumber == winningNumber) {
-        totalPoints += 50;
+        totalPoints += 100;
+        showGameOverDialog();
         
       }else{
       lives--;
@@ -258,42 +259,6 @@ void showGameOverDialog() {
                       Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
 
 
-
-                      // Card(
-                      //   color: theme.cardTheme.color,
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(15.0),
-                      //   ),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.all(20.0),
-                      //     child: Column(
-                      //       children: [
-                      //         Text(
-                      //           "You won $totalPoints points",
-                      //           style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary),
-                      //         ),
-
-                      //         SizedBox(height: 10),
-
-                      //         ElevatedButton.icon(
-                      //           onPressed: resetGame,
-                      //           icon: Icon(Icons.replay, color: theme.colorScheme.onPrimary),
-                      //           label: Text(
-                      //             "Play again",
-                      //             style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onPrimary),
-                      //           ),
-                      //           style: ElevatedButton.styleFrom(
-                      //             backgroundColor: theme.colorScheme.primary,
-                      //             minimumSize: Size(210, 50),
-                      //             shape: RoundedRectangleBorder(
-                      //               borderRadius: BorderRadius.circular(10),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
