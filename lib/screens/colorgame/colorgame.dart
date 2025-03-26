@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortuneblitz/theme.dart';
+import 'package:fortuneblitz/controller.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 
@@ -17,6 +18,10 @@ class _ColorGameState extends State<ColorGame> {
   List<String> aiChoices = [];
   int totalPoints = 0;
   int roundPoints = 0;
+  int lives = 5;
+  final GameController gameController = Get.find();
+
+  bool gameOver = false;
 
   void playGame(String chosenColor) {
     setState(() {
@@ -28,9 +33,20 @@ class _ColorGameState extends State<ColorGame> {
         colors[random.nextInt(colors.length)],
       ];
 
+      if (!aiChoices.contains(playerChoice)) {
+        lives--;
+        livesChecker();
+      }
       roundPoints = pointSystem(playerChoice!, aiChoices);
       totalPoints += roundPoints;
     });
+  }
+
+  void livesChecker() {
+    //life checker
+    if (lives == 0) {
+      showGameOverDialog();
+    }
   }
 
   int pointSystem(String playerColor, List<String> aiChoices) {
@@ -41,8 +57,99 @@ class _ColorGameState extends State<ColorGame> {
   void resetGame() {
     setState(() {
       totalPoints = 0;
+      roundPoints = 0;
       aiChoices.clear();
+      lives = 5;
     });
+  }
+
+  void showGameOverDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(16),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  roundPoints > 0
+                      ? 'You won $roundPoints points!'
+                      : 'Game Over!\n Your total points are: $totalPoints',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame();
+                  Get.back();
+                  Get.back();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 24.0,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.home, size: 24),
+                    SizedBox(width: 12),
+                    Text("Home", style: Theme.of(context).textTheme.bodyMedium),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame();
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 24.0,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.replay, size: 24),
+                    SizedBox(width: 12),
+                    Text(
+                      "Play Again",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget buildColorBox(String colorName) {
@@ -113,9 +220,15 @@ class _ColorGameState extends State<ColorGame> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //start of color game container
-            SizedBox(height: 5),
+            SizedBox(height: 150),
             Text(
               "CHOOSE YOUR COLOR",
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              "Lives left: $lives",
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -169,62 +282,6 @@ class _ColorGameState extends State<ColorGame> {
                   buildColorButton("Green"),
                 ],
               ),
-            ),
-            Column(
-              //Points system and play again container
-              children: [
-                Container(
-                  width: 250,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "You have $totalPoints points!", //not sure if round or total points ang lalagay
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      FilledButton(
-                        onPressed: () {
-                          resetGame();
-                        },
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          padding: WidgetStateProperty.all(
-                            EdgeInsets.symmetric(
-                              vertical: 12.0,
-                              horizontal: 24.0,
-                            ),
-                          ),
-                        ),
-                        child: SizedBox(
-                          width: 150,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.replay, size: 24),
-                              SizedBox(width: 12),
-                              Text(
-                                "Play Again",
-                                style: theme.textTheme.bodyMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
             ),
           ],
         ),
