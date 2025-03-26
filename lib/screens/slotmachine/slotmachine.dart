@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortuneblitz/theme.dart';
+import 'package:fortuneblitz/controller.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 
@@ -11,9 +12,13 @@ class SlotMachine extends StatefulWidget {
 }
 
 class _SlotMachineState extends State<SlotMachine> {
+  int lives = 10;
   int totalPoints = 0;
   final random = Random();
   List<String> slots = ['?', '?', '?'];
+  final GameController gameController = Get.find();
+
+  bool gameOver = false;
 
   final List<List<String>> items = [
     ["H", "A", "U"],
@@ -24,15 +29,26 @@ class _SlotMachineState extends State<SlotMachine> {
   void spin() {
     setState(() {
       // Generate new slot values
-      slots = List.generate(3, (index) {
-        int row = random.nextInt(items.length);
-        return items[row][index];
-      });
+      if (lives > 0) {
+        slots = List.generate(3, (index) {
+          int row = random.nextInt(items.length);
+          return items[row][index];
+        });
 
-      // Calculate points and update total
-      int points = calculatePoints(slots);
-      totalPoints += points;
+        // Calculate points and update total
+        int points = calculatePoints(slots);
+        totalPoints += points;
+        lives--;
+        livesChecker();
+      }
     });
+  }
+
+  void livesChecker() {
+    //life checker
+    if (lives == 0) {
+      showGameOverDialog();
+    }
   }
 
   int calculatePoints(List<String> slots) {
@@ -51,7 +67,97 @@ class _SlotMachineState extends State<SlotMachine> {
     setState(() {
       totalPoints = 0; //resets total points
       slots = ["?", "?", "?"]; //resets the slots into their initial state
+      lives = 10;
     });
+  }
+
+  void showGameOverDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(16),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  totalPoints > 0
+                      ? 'You won $totalPoints points!'
+                      : ('Game Over!\n Your total points are: $totalPoints'),
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame();
+                  Get.back();
+                  Get.back();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 24.0,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.home, size: 24),
+                    SizedBox(width: 12),
+                    Text("Home", style: Theme.of(context).textTheme.bodyMedium),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame();
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 24.0,
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.replay, size: 24),
+                    SizedBox(width: 12),
+                    Text(
+                      "Play Again",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget buildSlotBox(String symbol) {
@@ -80,17 +186,23 @@ class _SlotMachineState extends State<SlotMachine> {
       child: Card(
         color: theme.cardTheme.color,
         child: Container(
-          height: 150,
+          height: 120,
           width: 450,
           alignment: Alignment.center,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
           child: Column(
-            spacing: 20,
+            spacing: 15,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
                 "WD-302 SLOT MACHINE",
                 style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "Lives left: $lives",
+                style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -158,73 +270,12 @@ class _SlotMachineState extends State<SlotMachine> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 30),
+            SizedBox(height: 150),
             Center(child: SizedBox(height: 350, child: buildSlotMachine())),
             Center(
               child: SizedBox(height: 50, width: 150, child: buildPlayButton()),
             ),
             SizedBox(height: 20),
-            Center(
-              child: SizedBox(
-                height: 200,
-                child: Column(
-                  //Points system and play again container
-                  children: [
-                    Container(
-                      width: 350,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            "You have $totalPoints points!", //not sure if round or total points ang lalagay
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          FilledButton(
-                            onPressed: () {
-                              resetGame();
-                            },
-                            style: ButtonStyle(
-                              shape: WidgetStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                              padding: WidgetStateProperty.all(
-                                EdgeInsets.symmetric(
-                                  vertical: 12.0,
-                                  horizontal: 24.0,
-                                ),
-                              ),
-                            ),
-                            child: SizedBox(
-                              width: 150,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.replay, size: 24),
-                                  SizedBox(width: 12),
-                                  Text(
-                                    "Play Again",
-                                    style: theme.textTheme.bodyMedium,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       ),
