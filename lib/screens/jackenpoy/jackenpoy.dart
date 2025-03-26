@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:fortuneblitz/theme.dart";
+import "package:fortuneblitz/controller.dart";
 
 void main() {
   runApp(Jackenpoy());
@@ -15,10 +16,12 @@ class Jackenpoy extends StatefulWidget {
 }
 
 class _JackenpoyState extends State<Jackenpoy> {
+  final GameController gameController = Get.find();
   final List<String> choices = ["ROCK", "PAPER", "SCISSOR"];
   String userChoice = "?";
   String computerChoice = "?";
-  int score = 0;
+  int totalPoints = 0;
+  int lives = 5;
   final Random random = Random();
 
   // Determines the winner
@@ -30,11 +33,14 @@ class _JackenpoyState extends State<Jackenpoy> {
         (user == "PAPER" && computer == "ROCK") ||
         (user == "SCISSOR" && computer == "PAPER")) {
       setState(() {
-        score+=50;
+        totalPoints+=50;
       });
       return "You Win!";
     } else {
-      return "You Lose!";
+      setState(() {
+        lives--;
+      });
+      return "You Lose";
     }
   }
 
@@ -44,15 +50,113 @@ class _JackenpoyState extends State<Jackenpoy> {
       userChoice = userSelection;
       computerChoice = choices[random.nextInt(3)];
       determineWinner(userChoice, computerChoice);
-    });
+    if (lives == 0) {
+      Future.delayed(Duration(milliseconds: 500), () {
+        showGameOverDialog();
+      });
+    }
+  });
+}
+
+
+void showGameOverDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(16),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  totalPoints > 0
+                      ? 'You won $totalPoints points! ' 
+                      : 'Game Over! \n You won $totalPoints points',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame();
+                  print(gameController.totalPoints.value);
+                  Get.back();
+                  Get.back();
+                  print("Home button clicked");
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.home, size: 24),
+                    SizedBox(width: 12),
+                    Text(
+                      "Home",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame(); 
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.replay, size: 24),
+                    SizedBox(width: 12),
+                    Text(
+                      "Play Again",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
   }
+
+
+
 
   // Resets the game
   void resetGame() {
     setState(() {
       userChoice = "?";
       computerChoice = "?";
-      score = 0;
+      totalPoints = 0;
+      lives = 5;
     });
   }
 
@@ -168,43 +272,12 @@ class _JackenpoyState extends State<Jackenpoy> {
 
                   SizedBox(height: 50.0),
 
+                      
+
+                      Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+
                   // Result and Play Again Button
-                  Card(
-                    
-                    color: theme.cardTheme.color,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Column(
-                        children: [
-                          
-                          SizedBox(height: 10),
-                          Text(
-                            "You won $score points",
-                            style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary),
-                          ),
-                          SizedBox(height: 10),
-                          ElevatedButton.icon(
-                            onPressed: resetGame,
-                            icon: Icon(Icons.replay, color: theme.colorScheme.onPrimary),
-                            label: Text(
-                              "Play again",
-                              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: theme.colorScheme.primary,
-                              minimumSize: Size(210, 50),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                 
                 ],
               ),
             ),

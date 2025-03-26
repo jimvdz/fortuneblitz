@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:fortuneblitz/theme.dart';
+import 'package:fortuneblitz/controller.dart';
 
 
 class Lotto extends StatefulWidget {
@@ -12,9 +13,11 @@ class Lotto extends StatefulWidget {
 }
 
 class _LottoState extends State<Lotto> { 
+  final GameController gameController = Get.find();
   int userNumber = 0; 
   int winningNumber = 0; 
   int totalPoints = 0;
+  int lives = 5;
   final random = Random();
 
   void drawNumber() {
@@ -25,15 +28,120 @@ class _LottoState extends State<Lotto> {
       // If user wins, add points
       if (userNumber == winningNumber) {
         totalPoints += 50;
+        
+      }else{
+      lives--;
       }
+      if(lives == 0){
+        showGameOverDialog();      
+        }
     });
   }
+
+
+
+
+
+void showGameOverDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(16),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  totalPoints > 0
+                      ? 'You won $totalPoints points! ' 
+                      : 'Game Over! \n You won $totalPoints points',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame();
+                  print(gameController.totalPoints.value);
+                  Get.back();
+                  Get.back();
+                  print("Home button clicked");
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.home, size: 24),
+                    SizedBox(width: 12),
+                    Text(
+                      "Home",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.addPoints(totalPoints);
+                  resetGame(); 
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.replay, size: 24),
+                    SizedBox(width: 12),
+                    Text(
+                      "Play Again",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+
+
+
+
 
   void resetGame() {
     setState(() {
       userNumber = 0;
       winningNumber = 0;
       totalPoints = 0;
+      lives = 5;
     });
   }
   
@@ -97,7 +205,7 @@ class _LottoState extends State<Lotto> {
                           color: theme.colorScheme.tertiary,
                           child: Center(
                             child: Text(
-                            userNumber == 0 ? "?" : "$userNumber",
+                            "$userNumber",
 
                               style: theme.textTheme.displayLarge?.copyWith(color: theme.colorScheme.surface),
                             ),
@@ -138,7 +246,7 @@ class _LottoState extends State<Lotto> {
                           color: theme.colorScheme.tertiary,
                           child: Center(
                             child: Text(
-                            winningNumber == 0 ? "?" : "$winningNumber",
+                            "$winningNumber",
                               style: theme.textTheme.displayLarge?.copyWith(color: theme.colorScheme.surface),
                             ),
                           ),
@@ -147,41 +255,45 @@ class _LottoState extends State<Lotto> {
 
                       SizedBox(height: 50),
 
-                      Card(
-                        color: theme.cardTheme.color,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "You won $totalPoints points",
-                                style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary),
-                              ),
+                      Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
 
-                              SizedBox(height: 10),
 
-                              ElevatedButton.icon(
-                                onPressed: resetGame,
-                                icon: Icon(Icons.replay, color: theme.colorScheme.onPrimary),
-                                label: Text(
-                                  "Play again",
-                                  style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onPrimary),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: theme.colorScheme.primary,
-                                  minimumSize: Size(210, 50),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+
+                      // Card(
+                      //   color: theme.cardTheme.color,
+                      //   shape: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(15.0),
+                      //   ),
+                      //   child: Padding(
+                      //     padding: EdgeInsets.all(20.0),
+                      //     child: Column(
+                      //       children: [
+                      //         Text(
+                      //           "You won $totalPoints points",
+                      //           style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary),
+                      //         ),
+
+                      //         SizedBox(height: 10),
+
+                      //         ElevatedButton.icon(
+                      //           onPressed: resetGame,
+                      //           icon: Icon(Icons.replay, color: theme.colorScheme.onPrimary),
+                      //           label: Text(
+                      //             "Play again",
+                      //             style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onPrimary),
+                      //           ),
+                      //           style: ElevatedButton.styleFrom(
+                      //             backgroundColor: theme.colorScheme.primary,
+                      //             minimumSize: Size(210, 50),
+                      //             shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(10),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
