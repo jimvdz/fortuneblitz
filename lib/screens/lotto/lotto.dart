@@ -3,15 +3,12 @@ import 'package:get/get.dart';
 import 'dart:math';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
-
-
 class Lotto extends StatefulWidget {
   const Lotto({super.key});
 
   @override
   State<Lotto> createState() => _LottoState();
 }
-
 class _LottoState extends State<Lotto> { 
   final GameController gameController = Get.find();
   int userNumber = 0; 
@@ -38,10 +35,6 @@ class _LottoState extends State<Lotto> {
         }
     });
   }
-
-
-
-
 
 void showGameOverDialog() {
     showDialog(
@@ -131,12 +124,6 @@ void showGameOverDialog() {
     );
   }
 
-
-
-
-
-
-
   void resetGame() {
     setState(() {
       userNumber = 0;
@@ -179,12 +166,11 @@ void showGameOverDialog() {
           ),
         ),
 
-
-                body: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: theme.colorScheme.onTertiary, 
-                child: Column(
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: theme.colorScheme.onTertiary, 
+              child: Column(
                 children: [
                 Expanded(
                 child: SingleChildScrollView(
@@ -255,10 +241,7 @@ void showGameOverDialog() {
                       ),
 
                       SizedBox(height: 50),
-
                       Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-
-
                     ],
                   ),
                 ),

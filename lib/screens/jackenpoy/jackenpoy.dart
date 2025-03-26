@@ -210,7 +210,7 @@ void showGameOverDialog() {
                 children: [
                   SizedBox(height: 20.0),
                   
-              // Text("$userChoice vs $computerChoice", style: theme.textTheme.bodyLarge),
+             
                   SizedBox(
                     height: 200.0,
                     width: 378.0,
@@ -288,15 +288,10 @@ void showGameOverDialog() {
 
                   SizedBox(height: 50.0),
                   Text(gameResult, style: theme.textTheme.bodyLarge),
-
-                      SizedBox(height: 20.0),
+                  SizedBox(height: 20.0),
                   Text("You $userWins :  Computer $computerWins", style: theme.textTheme.bodyMedium),
                   SizedBox(height: 20),
-
-                      Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-
-                  // Result and Play Again Button
-                 
+                  Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),        
                 ],
               ),
             ),
