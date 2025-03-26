@@ -60,6 +60,7 @@ class _ColorGameState extends State<ColorGame> {
       roundPoints = 0;
       aiChoices.clear();
       lives = 5;
+      playerChoice = null;
     });
   }
 
@@ -282,6 +283,13 @@ class _ColorGameState extends State<ColorGame> {
                   buildColorButton("Green"),
                 ],
               ),
+            ),
+            Text(
+              playerChoice == null
+                  ? ""
+                  : !aiChoices.contains(playerChoice)
+                  ? "No matches this time. Try again!"
+                  : "You won $roundPoints points!",
             ),
           ],
         ),
