@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
+
 class Lotto extends StatefulWidget {
   const Lotto({super.key});
 
@@ -37,6 +41,13 @@ class _LottoState extends State<Lotto> {
   }
 
 void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    if (totalPoints > 0) {
+      audioController.playSound('win.mp3');
+    }
+    else {
+      audioController.playSound('gameover.mp3');
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -58,6 +69,7 @@ void showGameOverDialog() {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   print(gameController.totalPoints.value);
@@ -90,6 +102,7 @@ void showGameOverDialog() {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame(); 
                   Navigator.of(context).pop();
@@ -136,6 +149,7 @@ void showGameOverDialog() {
   @override
   Widget build(BuildContext context) {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     return MaterialApp(
       title:'Lotto',
@@ -151,19 +165,23 @@ void showGameOverDialog() {
             backgroundColor: theme.appBarTheme.backgroundColor,
             centerTitle: true,
 
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
-            
-            onPressed: () {
-              print("Back button clicked");
-              Get.back();
-            },
-            style: IconButton.styleFrom(
-              padding: EdgeInsets.all(4),
-              shape: CircleBorder(),
-              backgroundColor: theme.colorScheme.secondary,
-            )
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
+              onPressed: () {
+                audioController.playSound('click.mp3');
+                Get.back();
+                },
+              style: IconButton.styleFrom(
+                padding: EdgeInsets.all(4),
+                shape: CircleBorder(),
+                backgroundColor: theme.colorScheme.secondary,
+              ),
+            ),
           ),
+
+          actions: [AudioButton()],
         ),
 
             body: Container(
@@ -203,7 +221,10 @@ void showGameOverDialog() {
                       const SizedBox(height: 25),
 
                       ElevatedButton(
-                        onPressed: drawNumber,
+                        onPressed: () {
+                          audioController.playSound('click.mp3');
+                          drawNumber;
+                          },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: theme.colorScheme.primary,
                           minimumSize: const Size(210, 50),

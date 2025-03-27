@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
 import 'package:get/get.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class SlotMachine extends StatefulWidget {
   const SlotMachine({super.key});
@@ -76,6 +79,13 @@ class _SlotMachineState extends State<SlotMachine> {
   }
 
   void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    if (totalPoints > 0) {
+      audioController.playSound('win.mp3');
+    }
+    else {
+      audioController.playSound('gameover.mp3');
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -97,6 +107,7 @@ class _SlotMachineState extends State<SlotMachine> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Get.back();
@@ -127,6 +138,7 @@ class _SlotMachineState extends State<SlotMachine> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Navigator.of(context).pop();
@@ -166,6 +178,7 @@ class _SlotMachineState extends State<SlotMachine> {
 
   Widget buildSlotBox(String symbol) {
     final theme = myTheme;
+
     return Container(
       //slot machine container
       height: 100,
@@ -224,8 +237,10 @@ class _SlotMachineState extends State<SlotMachine> {
 
   Widget buildPlayButton() {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
     return ElevatedButton(
       onPressed: () {
+        audioController.playSound('click.mp3');
         spin();
       },
       style: ElevatedButton.styleFrom(
@@ -245,6 +260,8 @@ class _SlotMachineState extends State<SlotMachine> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -255,10 +272,11 @@ class _SlotMachineState extends State<SlotMachine> {
           ),
         ),
         leading: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.only(left: 20),
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
+              audioController.playSound('click.mp3');
               Get.back();
             },
             style: IconButton.styleFrom(
@@ -268,6 +286,7 @@ class _SlotMachineState extends State<SlotMachine> {
             ),
           ),
         ),
+        actions: [AudioButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
 import 'package:get/get.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class ColorGame extends StatefulWidget {
   const ColorGame({super.key});
@@ -65,6 +68,9 @@ class _ColorGameState extends State<ColorGame> {
   }
 
   void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    if (roundPoints > 0) {audioController.playSound('win.mp3');}
+    else {audioController.playSound('gameover.mp3');}
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -86,6 +92,7 @@ class _ColorGameState extends State<ColorGame> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Get.back();
@@ -116,6 +123,7 @@ class _ColorGameState extends State<ColorGame> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Navigator.of(context).pop();
@@ -172,8 +180,13 @@ class _ColorGameState extends State<ColorGame> {
 
   Widget buildColorButton(String color) {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
+
     return ElevatedButton(
-      onPressed: () => playGame(color),
+      onPressed: () {
+        audioController.playSound('click.mp3');
+        playGame(color);
+        },
       style: ElevatedButton.styleFrom(
         backgroundColor: theme.colorScheme.secondary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -190,6 +203,8 @@ class _ColorGameState extends State<ColorGame> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -200,10 +215,11 @@ class _ColorGameState extends State<ColorGame> {
           ),
         ),
         leading: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.only(left: 20),
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
+              audioController.playSound('click.mp3');
               Get.back();
             },
             style: IconButton.styleFrom(
@@ -213,6 +229,7 @@ class _ColorGameState extends State<ColorGame> {
             ),
           ),
         ),
+        actions: [AudioButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

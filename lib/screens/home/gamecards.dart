@@ -7,6 +7,8 @@ import 'package:fortuneblitz/screens/slotmachine/slotmachine.dart';
 import 'package:fortuneblitz/screens/jackenpoy/jackenpoy.dart';
 import 'package:fortuneblitz/screens/lotto/lotto.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class GameCards extends StatelessWidget {
   const GameCards({super.key});
@@ -15,6 +17,7 @@ class GameCards extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get yung theme sa current build
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     // List game data para maiwasan repetitive code
     final List<Map<String, dynamic>> games = [
@@ -63,6 +66,7 @@ class GameCards extends StatelessWidget {
                 child: InkWell(
                   splashColor: theme.colorScheme.tertiary.withAlpha(30),
                   onTap: () {
+                    audioController.playSound('click.mp3');
                     debugPrint('${game["title"]} card tapped');
                     final Widget nextPage = game["page"];
                     Get.to(() => nextPage);
@@ -99,6 +103,7 @@ class GameCards extends StatelessWidget {
                           width: double.infinity,
                           child: FilledButton(
                             onPressed: () {
+                              audioController.playSound('click.mp3');
                               print("${game["title"]} Play button clicked");
                               final Widget nextPage = game["page"];
                               Get.to(() => nextPage);

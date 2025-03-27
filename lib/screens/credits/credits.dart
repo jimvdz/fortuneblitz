@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:fortuneblitz/screens/credits/peoplecards.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class Credits extends StatelessWidget {
   const Credits({super.key});
@@ -10,6 +12,7 @@ class Credits extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -20,6 +23,7 @@ class Credits extends StatelessWidget {
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
+              audioController.playSound('click.mp3');
               print("Back button clicked");
               Get.back();
             },
