@@ -72,10 +72,8 @@ void showGameOverDialog() {
                   audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
-                  print(gameController.totalPoints.value);
                   Get.back();
                   Get.back();
-                  print("Home button clicked");
                 },
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all(

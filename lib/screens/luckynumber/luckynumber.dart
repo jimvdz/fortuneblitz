@@ -111,12 +111,10 @@ class _LuckyNumberState extends State<LuckyNumber> {
       setState(() {
         userInput += number.toString(); 
       });
-      debugPrint('$number tapped');
     } else {
       setState(() {
         userInput = number.toString();
       });
-      debugPrint('$number tapped, input reset to $userInput');
     }
 
     // Check if points have reached 0 and stop the game if so
@@ -160,10 +158,8 @@ class _LuckyNumberState extends State<LuckyNumber> {
                   audioController.playSound('click.mp3');
                   gameController.addPoints(points);
                   resetGame();
-                  print(gameController.totalPoints.value);
                   Get.back();
                   Get.back();
-                  print("Home button clicked");
                 },
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all(
@@ -248,7 +244,6 @@ class _LuckyNumberState extends State<LuckyNumber> {
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
               audioController.playSound('click.mp3');
-              print("Back button clicked");
               Get.back();
             },
             style: IconButton.styleFrom(
@@ -365,7 +360,6 @@ class _LuckyNumberState extends State<LuckyNumber> {
                               splashColor: theme.colorScheme.tertiary.withAlpha(30),
                               onTap: () {
                                 onNumberClicked(number);
-                                debugPrint('$number tapped');
                               },
                               child: Container(
                               height: cardWidth - 16,
@@ -400,7 +394,6 @@ class _LuckyNumberState extends State<LuckyNumber> {
                                 setState(() {
                                   userInput = '??';  // Clear the input
                                 });
-                                print("Clear button clicked");
                               },
                               style: ButtonStyle(
                                 shape: WidgetStateProperty.all(
@@ -437,7 +430,6 @@ class _LuckyNumberState extends State<LuckyNumber> {
                                   compareGuess();
                                 }                                
                                 setState(() {});
-                                print("Check button clicked");
                               },
                               style: ButtonStyle(
                                 shape: WidgetStateProperty.all(

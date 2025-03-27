@@ -65,7 +65,6 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   audioController.playSound('click.mp3');
                   gameController.resetPoints();
-                  print("Reset score clicked");
                   Navigator.of(context).pop();
                 },
                 style: ButtonStyle(
@@ -111,7 +110,6 @@ class _HomeState extends State<Home> {
             ),
             onPressed: () {
               audioController.playSound('click.mp3');
-              print("Credits clicked");
               Get.to(() => const Credits());
             },
             style: IconButton.styleFrom(
@@ -180,7 +178,6 @@ class _HomeState extends State<Home> {
                     FilledButton(
                       onPressed: () {
                         audioController.playSound('click.mp3');
-                        print("Reset score clicked");
                         showConfirmationDialog();
                       },
                       style: ButtonStyle(

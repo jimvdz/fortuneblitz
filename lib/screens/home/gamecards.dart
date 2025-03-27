@@ -67,7 +67,6 @@ class GameCards extends StatelessWidget {
                   splashColor: theme.colorScheme.tertiary.withAlpha(30),
                   onTap: () {
                     audioController.playSound('click.mp3');
-                    debugPrint('${game["title"]} card tapped');
                     final Widget nextPage = game["page"];
                     Get.to(() => nextPage);
                   },
@@ -104,7 +103,6 @@ class GameCards extends StatelessWidget {
                           child: FilledButton(
                             onPressed: () {
                               audioController.playSound('click.mp3');
-                              print("${game["title"]} Play button clicked");
                               final Widget nextPage = game["page"];
                               Get.to(() => nextPage);
                             },

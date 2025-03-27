@@ -24,7 +24,6 @@ class Credits extends StatelessWidget {
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
               audioController.playSound('click.mp3');
-              print("Back button clicked");
               Get.back();
             },
             style: IconButton.styleFrom(

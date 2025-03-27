@@ -61,9 +61,6 @@ class PeopleCards extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 child: InkWell(
                   splashColor: theme.colorScheme.tertiary.withAlpha(30),
-                  onTap: () {
-                    debugPrint('${person["name"]} card tapped');
-                  },
                   child: Container(
                     padding: EdgeInsets.all(16),
                     child: Column(
