@@ -12,7 +12,7 @@ class SlotMachine extends StatefulWidget {
 }
 
 class _SlotMachineState extends State<SlotMachine> {
-  int lives = 10;
+  int tries = 7;
   int totalPoints = 0;
   final random = Random();
   List<String> slots = ['?', '?', '?'];
@@ -29,7 +29,7 @@ class _SlotMachineState extends State<SlotMachine> {
   void spin() {
     setState(() {
       // Generate new slot values
-      if (lives > 0) {
+      if (tries > 0) {
         slots = List.generate(3, (index) {
           int row = random.nextInt(items.length);
           return items[row][index];
@@ -38,17 +38,21 @@ class _SlotMachineState extends State<SlotMachine> {
         // Calculate points and update total
         int points = calculatePoints(slots);
         totalPoints += points;
-        lives--;
-        livesChecker();
+        tries--;
+        triesChecker();
       }
     });
   }
 
-  void livesChecker() {
-    //life checker
-    if (lives == 0) {
+  void triesChecker() {
+    String combinations = slots.join();
+    if (combinations == "HAU" ||
+        combinations == "SOC" ||
+        combinations == "WEB" ||
+        tries == 0) {
       showGameOverDialog();
     }
+    //life checker
   }
 
   int calculatePoints(List<String> slots) {
@@ -67,7 +71,7 @@ class _SlotMachineState extends State<SlotMachine> {
     setState(() {
       totalPoints = 0; //resets total points
       slots = ["?", "?", "?"]; //resets the slots into their initial state
-      lives = 10;
+      tries = 7; //resets the tries to 5
     });
   }
 
@@ -175,6 +179,7 @@ class _SlotMachineState extends State<SlotMachine> {
         symbol,
         style: theme.textTheme.displayLarge?.copyWith(
           fontWeight: FontWeight.bold,
+          color: Colors.black,
         ),
       ),
     );
@@ -201,7 +206,7 @@ class _SlotMachineState extends State<SlotMachine> {
                 ),
               ),
               Text(
-                "Lives left: $lives",
+                "Tries left: $tries",
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
