@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
 import 'package:get/get.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class ColorGame extends StatefulWidget {
   const ColorGame({super.key});
@@ -190,6 +193,8 @@ class _ColorGameState extends State<ColorGame> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -213,6 +218,7 @@ class _ColorGameState extends State<ColorGame> {
             ),
           ),
         ),
+        actions: [AudioButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

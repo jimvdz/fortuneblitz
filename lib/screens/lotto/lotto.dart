@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
+
 class Lotto extends StatefulWidget {
   const Lotto({super.key});
 
@@ -136,6 +140,7 @@ void showGameOverDialog() {
   @override
   Widget build(BuildContext context) {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     return MaterialApp(
       title:'Lotto',
@@ -164,6 +169,8 @@ void showGameOverDialog() {
               backgroundColor: theme.colorScheme.secondary,
             )
           ),
+
+          actions: [AudioButton()],
         ),
 
             body: Container(

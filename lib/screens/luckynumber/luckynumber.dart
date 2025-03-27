@@ -2,8 +2,11 @@
 
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:get/get.dart';
 import 'package:fortuneblitz/controller.dart';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class LuckyNumber extends StatefulWidget {
   const LuckyNumber({super.key});
@@ -223,6 +226,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -243,6 +247,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
             ),
           ),
         ),
+        actions: [AudioButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

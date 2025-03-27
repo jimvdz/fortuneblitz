@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
 import 'package:get/get.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class SlotMachine extends StatefulWidget {
   const SlotMachine({super.key});
@@ -166,6 +169,7 @@ class _SlotMachineState extends State<SlotMachine> {
 
   Widget buildSlotBox(String symbol) {
     final theme = myTheme;
+
     return Container(
       //slot machine container
       height: 100,
@@ -245,6 +249,8 @@ class _SlotMachineState extends State<SlotMachine> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -268,6 +274,7 @@ class _SlotMachineState extends State<SlotMachine> {
             ),
           ),
         ),
+        actions: [AudioButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

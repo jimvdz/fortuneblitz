@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fortuneblitz/audio/audiobutton.dart';
 import 'package:get/get.dart';
 import "package:fortuneblitz/theme.dart";
 import "package:fortuneblitz/controller.dart";
 import 'dart:math';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 void main() {
   runApp(Jackenpoy());
@@ -179,6 +182,7 @@ void showGameOverDialog() {
   @override
   Widget build(BuildContext context) {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     return MaterialApp(
       title: 'Jackenpoy',
@@ -198,6 +202,7 @@ void showGameOverDialog() {
               backgroundColor: theme.colorScheme.secondary,
             ),
           ),
+          actions: [AudioButton()],
         ),
         body: Container(
           width: double.infinity,
