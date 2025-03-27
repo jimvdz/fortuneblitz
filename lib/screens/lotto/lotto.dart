@@ -220,8 +220,8 @@ void showGameOverDialog() {
 
                       ElevatedButton(
                         onPressed: () {
+                          drawNumber();
                           audioController.playSound('click.mp3');
-                          drawNumber;
                           },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: theme.colorScheme.primary,
