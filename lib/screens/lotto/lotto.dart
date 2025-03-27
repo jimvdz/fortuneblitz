@@ -3,15 +3,12 @@ import 'package:get/get.dart';
 import 'dart:math';
 import 'package:fortuneblitz/theme.dart';
 import 'package:fortuneblitz/controller.dart';
-
-
 class Lotto extends StatefulWidget {
   const Lotto({super.key});
 
   @override
   State<Lotto> createState() => _LottoState();
 }
-
 class _LottoState extends State<Lotto> { 
   final GameController gameController = Get.find();
   int userNumber = 0; 
@@ -27,7 +24,8 @@ class _LottoState extends State<Lotto> {
       
       // If user wins, add points
       if (userNumber == winningNumber) {
-        totalPoints += 50;
+        totalPoints += 100;
+        showGameOverDialog();
         
       }else{
       lives--;
@@ -37,10 +35,6 @@ class _LottoState extends State<Lotto> {
         }
     });
   }
-
-
-
-
 
 void showGameOverDialog() {
     showDialog(
@@ -130,12 +124,6 @@ void showGameOverDialog() {
     );
   }
 
-
-
-
-
-
-
   void resetGame() {
     setState(() {
       userNumber = 0;
@@ -178,12 +166,11 @@ void showGameOverDialog() {
           ),
         ),
 
-
-                body: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: theme.colorScheme.onTertiary, 
-                child: Column(
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: theme.colorScheme.onTertiary, 
+              child: Column(
                 children: [
                 Expanded(
                 child: SingleChildScrollView(
@@ -254,46 +241,7 @@ void showGameOverDialog() {
                       ),
 
                       SizedBox(height: 50),
-
                       Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-
-
-
-                      // Card(
-                      //   color: theme.cardTheme.color,
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(15.0),
-                      //   ),
-                      //   child: Padding(
-                      //     padding: EdgeInsets.all(20.0),
-                      //     child: Column(
-                      //       children: [
-                      //         Text(
-                      //           "You won $totalPoints points",
-                      //           style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary),
-                      //         ),
-
-                      //         SizedBox(height: 10),
-
-                      //         ElevatedButton.icon(
-                      //           onPressed: resetGame,
-                      //           icon: Icon(Icons.replay, color: theme.colorScheme.onPrimary),
-                      //           label: Text(
-                      //             "Play again",
-                      //             style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onPrimary),
-                      //           ),
-                      //           style: ElevatedButton.styleFrom(
-                      //             backgroundColor: theme.colorScheme.primary,
-                      //             minimumSize: Size(210, 50),
-                      //             shape: RoundedRectangleBorder(
-                      //               borderRadius: BorderRadius.circular(10),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
