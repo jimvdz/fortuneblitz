@@ -68,6 +68,9 @@ class _ColorGameState extends State<ColorGame> {
   }
 
   void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    if (roundPoints > 0) {audioController.playSound('win.mp3');}
+    else {audioController.playSound('gameover.mp3');}
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -89,6 +92,7 @@ class _ColorGameState extends State<ColorGame> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Get.back();
@@ -119,6 +123,7 @@ class _ColorGameState extends State<ColorGame> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Navigator.of(context).pop();
@@ -175,8 +180,13 @@ class _ColorGameState extends State<ColorGame> {
 
   Widget buildColorButton(String color) {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
+
     return ElevatedButton(
-      onPressed: () => playGame(color),
+      onPressed: () {
+        audioController.playSound('click.mp3');
+        playGame(color);
+        },
       style: ElevatedButton.styleFrom(
         backgroundColor: theme.colorScheme.secondary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -209,6 +219,7 @@ class _ColorGameState extends State<ColorGame> {
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
+              audioController.playSound('click.mp3');
               Get.back();
             },
             style: IconButton.styleFrom(

@@ -25,7 +25,7 @@ class AudioController {
   }
 
   void playSound(String fileName) {
-    if (!isMuted) FlameAudio.play(fileName); 
+    FlameAudio.play(fileName); 
   }
 
   void startMusic() {

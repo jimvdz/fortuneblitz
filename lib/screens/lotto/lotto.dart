@@ -41,6 +41,13 @@ class _LottoState extends State<Lotto> {
   }
 
 void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    if (totalPoints > 0) {
+      audioController.playSound('win.mp3');
+    }
+    else {
+      audioController.playSound('gameover.mp3');
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -62,6 +69,7 @@ void showGameOverDialog() {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   print(gameController.totalPoints.value);
@@ -94,6 +102,7 @@ void showGameOverDialog() {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame(); 
                   Navigator.of(context).pop();
@@ -160,7 +169,10 @@ void showGameOverDialog() {
             padding: const EdgeInsets.only(left: 20),
             child: IconButton(
               icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
-              onPressed: () => Get.back(),
+              onPressed: () {
+                audioController.playSound('click.mp3');
+                Get.back();
+                },
               style: IconButton.styleFrom(
                 padding: EdgeInsets.all(4),
                 shape: CircleBorder(),
@@ -209,7 +221,10 @@ void showGameOverDialog() {
                       const SizedBox(height: 25),
 
                       ElevatedButton(
-                        onPressed: drawNumber,
+                        onPressed: () {
+                          audioController.playSound('click.mp3');
+                          drawNumber;
+                          },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: theme.colorScheme.primary,
                           minimumSize: const Size(210, 50),

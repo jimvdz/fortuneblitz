@@ -128,6 +128,14 @@ class _LuckyNumberState extends State<LuckyNumber> {
   }
 
   void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+
+    if (points > 0) {
+      audioController.playSound('win.mp3');
+    }
+    else {
+      audioController.playSound('gameover.mp3');
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -149,6 +157,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(points);
                   resetGame();
                   print(gameController.totalPoints.value);
@@ -181,6 +190,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(points);
                   resetGame(); 
                   Navigator.of(context).pop();
@@ -237,6 +247,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
+              audioController.playSound('click.mp3');
               print("Back button clicked");
               Get.back();
             },
@@ -385,6 +396,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
                             height: 50,
                             child: FilledButton(
                               onPressed: () {
+                                audioController.playSound('click.mp3');
                                 setState(() {
                                   userInput = '??';  // Clear the input
                                 });
@@ -419,6 +431,7 @@ class _LuckyNumberState extends State<LuckyNumber> {
                             height: 50,
                             child: FilledButton(
                               onPressed: () {
+                                audioController.playSound('click.mp3');
                                 userGuess = int.tryParse(userInput) ?? 0;
                                 if (!(points <= 0)) {
                                   compareGuess();

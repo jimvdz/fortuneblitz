@@ -79,6 +79,13 @@ class _SlotMachineState extends State<SlotMachine> {
   }
 
   void showGameOverDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+    if (totalPoints > 0) {
+      audioController.playSound('win.mp3');
+    }
+    else {
+      audioController.playSound('gameover.mp3');
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -100,6 +107,7 @@ class _SlotMachineState extends State<SlotMachine> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Get.back();
@@ -130,6 +138,7 @@ class _SlotMachineState extends State<SlotMachine> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.addPoints(totalPoints);
                   resetGame();
                   Navigator.of(context).pop();
@@ -228,8 +237,10 @@ class _SlotMachineState extends State<SlotMachine> {
 
   Widget buildPlayButton() {
     final theme = myTheme;
+    final audioController = Provider.of<AudioController>(context, listen: false);
     return ElevatedButton(
       onPressed: () {
+        audioController.playSound('click.mp3');
         spin();
       },
       style: ElevatedButton.styleFrom(
@@ -265,6 +276,7 @@ class _SlotMachineState extends State<SlotMachine> {
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
+              audioController.playSound('click.mp3');
               Get.back();
             },
             style: IconButton.styleFrom(
