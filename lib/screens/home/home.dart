@@ -6,6 +6,8 @@ import 'package:fortuneblitz/screens/home/gamecards.dart';
 import 'package:fortuneblitz/screens/credits/credits.dart';
 import 'package:get/get.dart';
 import 'package:fortuneblitz/controller.dart';
+import 'package:provider/provider.dart';
+import 'package:fortuneblitz/audio/audio_controller.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,9 +20,77 @@ class _HomeState extends State<Home> {
   
   final GameController gameController = Get.put(GameController());
 
+  void showConfirmationDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(16),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  'Are you sure to reset score?',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  ),
+                ),
+                child: Text(
+                  "Cancel",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+              SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  gameController.resetPoints();
+                  print("Reset score clicked");
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  ),
+                ),
+                child: Text(
+                  "Yes, reset",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); // Get yung theme sa current build
+    final audioController = Provider.of<AudioController>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -33,22 +103,53 @@ class _HomeState extends State<Home> {
               'assets/icons/info.svg',
               width: 24,
               height: 24,
-              colorFilter: const ColorFilter.mode(
-                Colors.white,
-                BlendMode.srcIn,
-              ),
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             ),
             onPressed: () {
+              audioController.playSound('click.mp3');
               print("Credits clicked");
               Get.to(() => const Credits());
             },
             style: IconButton.styleFrom(
               backgroundColor: theme.colorScheme.secondary,
               shape: const CircleBorder(),
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(8),
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Transform.scale(
+              scale: 0.92,
+              child: IconButton(
+                icon: Icon(
+                  audioController.isMuted ? Icons.volume_off : Icons.volume_up,
+                  color: Colors.white,
+                  size: 20
+                ),
+                onPressed: () {
+                  setState(() {
+                    audioController.isMuted = !audioController.isMuted;
+                    if (audioController.isMuted) {
+                      audioController.stopMusic();
+                      audioController.mute(true);
+                    } else {
+                      audioController.startMusic();
+                      audioController.mute(false);
+                    }
+                  });
+                },
+                style: IconButton.styleFrom(
+                  backgroundColor: theme.colorScheme.secondary,
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(0),
+                  fixedSize: const Size(20, 20)
+                ),
+              ),
+            )
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -74,8 +175,8 @@ class _HomeState extends State<Home> {
                     SizedBox(height: 4), // for spacing kasi may leading yung texts
                     FilledButton(
                       onPressed: () {
-                        gameController.resetPoints();
                         print("Reset score clicked");
+                        showConfirmationDialog();
                       },
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all(
