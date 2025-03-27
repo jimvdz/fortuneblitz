@@ -193,13 +193,16 @@ void showGameOverDialog() {
           title: Text("JACK EN POY", style: theme.textTheme.bodyLarge),
           backgroundColor: theme.appBarTheme.backgroundColor,
           centerTitle: true,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
-            onPressed: () => Get.back(),
-            style: IconButton.styleFrom(
-              padding: EdgeInsets.all(4),
-              shape: CircleBorder(),
-              backgroundColor: theme.colorScheme.secondary,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
+              onPressed: () => Get.back(),
+              style: IconButton.styleFrom(
+                padding: EdgeInsets.all(4),
+                shape: CircleBorder(),
+                backgroundColor: theme.colorScheme.secondary,
+              ),
             ),
           ),
           actions: [AudioButton()],

@@ -261,7 +261,7 @@ class _SlotMachineState extends State<SlotMachine> {
           ),
         ),
         leading: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.only(left: 20),
           child: IconButton(
             icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
             onPressed: () {
