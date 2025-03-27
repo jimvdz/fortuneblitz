@@ -21,9 +21,11 @@ class _HomeState extends State<Home> {
   final GameController gameController = Get.put(GameController());
 
   void showConfirmationDialog() {
+    final audioController = Provider.of<AudioController>(context, listen: false);
+
     showDialog(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           contentPadding: EdgeInsets.all(16),
@@ -40,6 +42,7 @@ class _HomeState extends State<Home> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   Navigator.of(context).pop();
                 },
                 style: ButtonStyle(
@@ -60,6 +63,7 @@ class _HomeState extends State<Home> {
               SizedBox(height: 20),
               FilledButton(
                 onPressed: () {
+                  audioController.playSound('click.mp3');
                   gameController.resetPoints();
                   print("Reset score clicked");
                   Navigator.of(context).pop();
@@ -175,6 +179,7 @@ class _HomeState extends State<Home> {
                     SizedBox(height: 4), // for spacing kasi may leading yung texts
                     FilledButton(
                       onPressed: () {
+                        audioController.playSound('click.mp3');
                         print("Reset score clicked");
                         showConfirmationDialog();
                       },
