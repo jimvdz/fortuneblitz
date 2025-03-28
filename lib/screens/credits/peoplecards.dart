@@ -13,32 +13,32 @@ class PeopleCards extends StatelessWidget {
     final List<Map<String, String>> people = [
       {
         "name": "JIMWEL L. VALDEZ",
-        "image": "images/people/valdez.jpg",
+        "image": "assets/images/people/valdez.jpg",
         "role": "Project Lead, Game Developer, UI/UX Design",
       },
       {
         "name": "CHRISTINE JASLINE D. NATIVIDAD",
-        "image": "images/people/natividad.jpg",
+        "image": "assets/images/people/natividad.jpg",
         "role": "Game Developer, UI/UX Design",
       },
       {
         "name": "KATE ANNE S. DAVID",
-        "image": "images/people/david.jpg",
+        "image": "assets/images/people/david.jpg",
         "role": "Game Developer, UI/UX Design",
       },
       {
         "name": "CHESTER JONATHAN C. TAYAG",
-        "image": "images/people/tayag.jpg",
+        "image": "assets/images/people/tayag.jpg",
         "role": "Game Concepts, UI/UX Design",
       },
       {
         "name": "BRYAN AARON B. SANTIAGO",
-        "image": "images/people/placeholder.jpg",
+        "image": "assets/images/people/placeholder.jpg",
         "role": "UI/UX Design",
       },
       {
         "name": "LUIS MIGUEL I. CAYANAN",
-        "image": "images/people/placeholder.jpg",
+        "image": "assets/images/people/placeholder.jpg",
         "role": "UI/UX Design",
       },
     ];

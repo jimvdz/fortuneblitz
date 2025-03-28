@@ -454,8 +454,6 @@ class _LuckyNumberState extends State<LuckyNumber> {
                 ]
               )
             ),
-            
-            SizedBox(height: 48)
           ]
         )
       )

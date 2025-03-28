@@ -149,125 +149,119 @@ void showGameOverDialog() {
     final theme = myTheme;
     final audioController = Provider.of<AudioController>(context, listen: false);
 
-    return MaterialApp(
-      title:'Lotto',
-      debugShowCheckedModeBanner: false,
-      theme: Theme.of(context),
-      home: Scaffold(
+    return Scaffold(
+        appBar: AppBar(
+        title: Text(
+          "LOTTO",
+          style: theme.textTheme.bodyLarge,
+          ),
+          backgroundColor: theme.appBarTheme.backgroundColor,
+          centerTitle: true,
 
-       appBar: AppBar(
-          title: Text(
-            "LOTTO",
-            style: theme.textTheme.bodyLarge,
-            ),
-            backgroundColor: theme.appBarTheme.backgroundColor,
-            centerTitle: true,
-
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
-              onPressed: () {
-                audioController.playSound('click.mp3');
-                Get.back();
-                },
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.all(4),
-                shape: CircleBorder(),
-                backgroundColor: theme.colorScheme.secondary,
-              ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
+            onPressed: () {
+              audioController.playSound('click.mp3');
+              Get.back();
+              },
+            style: IconButton.styleFrom(
+              padding: EdgeInsets.all(4),
+              shape: CircleBorder(),
+              backgroundColor: theme.colorScheme.secondary,
             ),
           ),
-
-          actions: [AudioButton()],
         ),
 
-            body: Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: theme.colorScheme.onTertiary, 
-              child: Column(
-                children: [
-                Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 10.0),
-                      Text(
-                        "YOUR NUMBER IS",
-                        style: theme.textTheme.bodyLarge,
-                      ),
+        actions: [AudioButton()],
+      ),
 
-                      SizedBox(height: 10.0),
+          body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: theme.colorScheme.onTertiary, 
+            child: Column(
+              children: [
+              Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 10.0),
+                    Text(
+                      "YOUR NUMBER IS",
+                      style: theme.textTheme.bodyLarge,
+                    ),
 
-                      SizedBox(
-                        height: 150.0,
-                        width: 210.0,
-                        child: Card(
-                          color: theme.colorScheme.tertiary,
-                          child: Center(
-                            child: Text(
-                            "$userNumber",
+                    SizedBox(height: 10.0),
 
-                              style: theme.textTheme.displayLarge?.copyWith(color: theme.colorScheme.surface),
-                            ),
+                    SizedBox(
+                      height: 150.0,
+                      width: 210.0,
+                      child: Card(
+                        color: theme.colorScheme.tertiary,
+                        child: Center(
+                          child: Text(
+                          "$userNumber",
+
+                            style: theme.textTheme.displayLarge?.copyWith(color: theme.colorScheme.surface),
                           ),
                         ),
                       ),
+                    ),
 
-                      const SizedBox(height: 25),
+                    const SizedBox(height: 25),
 
-                      ElevatedButton(
-                        onPressed: () {
-                          drawNumber();
-                          audioController.playSound('click.mp3');
-                          },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.colorScheme.primary,
-                          minimumSize: const Size(210, 50),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ElevatedButton(
+                      onPressed: () {
+                        drawNumber();
+                        audioController.playSound('click.mp3');
+                        },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.primary,
+                        minimumSize: const Size(210, 50),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                      ),
+                      child: Text(
+                        "Draw",
+                        style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onError),
+                      ),
+                    ),
+
+                    SizedBox(height: 70.0),
+
+                    Text(
+                      "WINNING NUMBER",
+                      style: theme.textTheme.bodyLarge,
+                    ),
+
+                    SizedBox(height: 10.0),
+
+                    SizedBox(
+                      height: 150.0,
+                      width: 210.0,
+                      child: Card(
+                        color: theme.colorScheme.tertiary,
+                        child: Center(
+                          child: Text(
+                          "$winningNumber",
+                            style: theme.textTheme.displayLarge?.copyWith(color: theme.colorScheme.surface),
                           ),
                         ),
-                        child: Text(
-                          "Draw",
-                          style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onError),
-                        ),
                       ),
+                    ),
 
-                      SizedBox(height: 70.0),
-
-                      Text(
-                        "WINNING NUMBER",
-                        style: theme.textTheme.bodyLarge,
-                      ),
-
-                      SizedBox(height: 10.0),
-
-                      SizedBox(
-                        height: 150.0,
-                        width: 210.0,
-                        child: Card(
-                          color: theme.colorScheme.tertiary,
-                          child: Center(
-                            child: Text(
-                            "$winningNumber",
-                              style: theme.textTheme.displayLarge?.copyWith(color: theme.colorScheme.surface),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(height: 50),
-                      Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
+                    SizedBox(height: 50),
+                    Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+                  ],
                 ),
               ),
-            ],
-          ),
-        )
+            ),
+          ],
+        ),
       )
     );
   }

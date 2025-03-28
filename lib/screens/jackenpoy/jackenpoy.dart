@@ -191,136 +191,131 @@ void showGameOverDialog() {
     final theme = myTheme;
     final audioController = Provider.of<AudioController>(context, listen: false);
 
-    return MaterialApp(
-      title: 'Jackenpoy',
-      debugShowCheckedModeBanner: false,
-      theme: Theme.of(context),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("JACK EN POY", style: theme.textTheme.bodyLarge),
-          backgroundColor: theme.appBarTheme.backgroundColor,
-          centerTitle: true,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
-              onPressed: () {
-                audioController.playSound('click.mp3');
-                Get.back();
-                },
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.all(4),
-                shape: CircleBorder(),
-                backgroundColor: theme.colorScheme.secondary,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("JACK EN POY", style: theme.textTheme.bodyLarge),
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        centerTitle: true,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back, size: 24, color: Colors.white),
+            onPressed: () {
+              audioController.playSound('click.mp3');
+              Get.back();
+              },
+            style: IconButton.styleFrom(
+              padding: EdgeInsets.all(4),
+              shape: CircleBorder(),
+              backgroundColor: theme.colorScheme.secondary,
             ),
           ),
-          actions: [AudioButton()],
         ),
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: theme.colorScheme.onTertiary,
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 20.0),
-                  
-             
-                  SizedBox(
-                    height: 200.0,
-                    width: 378.0,
-                    child: Card(
-                      color: theme.cardTheme.shadowColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: theme.colorScheme.onPrimary, width: .0),
-                      ),
-                      child: Center(
-                        child: Text(
-                          computerChoice,
-                          style: theme.textTheme.headlineLarge?.copyWith(color: theme.colorScheme.onPrimary),
-                        ),
+        actions: [AudioButton()],
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: theme.colorScheme.onTertiary,
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 20.0),
+                
+            
+                SizedBox(
+                  height: 150.0,
+                  width: 378.0,
+                  child: Card(
+                    color: theme.cardTheme.shadowColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      side: BorderSide(color: theme.colorScheme.onPrimary, width: .0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        computerChoice,
+                        style: theme.textTheme.headlineLarge?.copyWith(color: theme.colorScheme.onPrimary),
                       ),
                     ),
                   ),
-                  
-                  SizedBox(height: 20.0),
-                  Text("VS", style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onPrimary)),
-                  SizedBox(height: 20.0),
-                  
-                  // User's Choice
-                  SizedBox(
-                    height: 200.0,
-                    width: 378.0,
-                    child: Card(
-                      color: theme.colorScheme.secondary,
-                      child: Center(
-                        child: Text(
-                          userChoice,
-                          style: theme.textTheme.headlineLarge?.copyWith(color: theme.colorScheme.onPrimary),
-                        ),
+                ),
+                
+                SizedBox(height: 20.0),
+                Text("VS", style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onPrimary)),
+                SizedBox(height: 20.0),
+                
+                // User's Choice
+                SizedBox(
+                  height: 150.0,
+                  width: 378.0,
+                  child: Card(
+                    color: theme.colorScheme.secondary,
+                    child: Center(
+                      child: Text(
+                        userChoice,
+                        style: theme.textTheme.headlineLarge?.copyWith(color: theme.colorScheme.onPrimary),
                       ),
                     ),
                   ),
-                  
-                  SizedBox(height: 20.0),
+                ),
+                
+                SizedBox(height: 20.0),
 
-                  // Buttons for selecting moves
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          audioController.playSound('click.mp3');
-                          playGame("PAPER");
-                          },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.colorScheme.secondary,
-                          padding: EdgeInsets.all(21.0),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                        ),
-                        child: Text("PAPER", style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary)),
+                // Buttons for selecting moves
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        audioController.playSound('click.mp3');
+                        playGame("PAPER");
+                        },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.secondary,
+                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                       ),
-                      SizedBox(width: 17),
-                      ElevatedButton(
-                        onPressed: () {
-                          audioController.playSound('click.mp3');
-                          playGame("SCISSOR");
-                          },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.colorScheme.secondary,
-                          padding: EdgeInsets.all(21.0),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                        ),
-                        child: Text("SCISSOR", style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary)),
+                      child: Text("PAPER", style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary)),
+                    ),
+                    SizedBox(width: 17),
+                    ElevatedButton(
+                      onPressed: () {
+                        audioController.playSound('click.mp3');
+                        playGame("SCISSOR");
+                        },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.secondary,
+                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                       ),
-                      SizedBox(width: 17),
-                      ElevatedButton(
-                        onPressed: () {
-                          audioController.playSound('click.mp3');
-                          playGame("ROCK");
-                          },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.colorScheme.secondary,
-                          padding: EdgeInsets.all(21.0),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                        ),
-                        child: Text("ROCK", style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary)),
+                      child: Text("SCISSOR", style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary)),
+                    ),
+                    SizedBox(width: 17),
+                    ElevatedButton(
+                      onPressed: () {
+                        audioController.playSound('click.mp3');
+                        playGame("ROCK");
+                        },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: theme.colorScheme.secondary,
+                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                       ),
-                    ],
-                  ),
+                      child: Text("ROCK", style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimary)),
+                    ),
+                  ],
+                ),
 
-                  SizedBox(height: 50.0),
-                  Text(gameResult, style: theme.textTheme.bodyLarge),
-                  SizedBox(height: 20.0),
-                  Text("You $userWins :  Computer $computerWins", style: theme.textTheme.bodyMedium),
-                  SizedBox(height: 20),
-                  Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),        
-                ],
-              ),
+                SizedBox(height: 20.0),
+                Text(gameResult, style: theme.textTheme.bodyLarge),
+                SizedBox(height: 20.0),
+                Text("You $userWins :  Computer $computerWins", style: theme.textTheme.bodyMedium),
+                SizedBox(height: 20),
+                Text("Lives left: $lives", style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),        
+              ],
             ),
           ),
         ),

@@ -17,15 +17,15 @@ class AudioController {
   Future<void> initialize() async {
     // Preload audio files to avoid lag
     await FlameAudio.audioCache.loadAll([
-      'audio/bgmusic.mp3',
-      'audio/click.mp3',
-      'audio/gameover.mp3',
-      'audio/win.mp3',
+      'bgmusic.mp3',
+      'click.mp3',
+      'gameover.mp3',
+      'win.mp3',
     ]);
   }
 
   void playSound(String fileName) {
-    FlameAudio.play(fileName); 
+    FlameAudio.play(fileName, volume: 0.7); 
   }
 
   void startMusic() {

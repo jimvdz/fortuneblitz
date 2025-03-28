@@ -246,7 +246,7 @@ class _SlotMachineState extends State<SlotMachine> {
       style: ElevatedButton.styleFrom(
         backgroundColor: theme.colorScheme.secondary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        padding: EdgeInsets.only(left: 50, right: 50, top: 15, bottom: 15),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
       ),
       child: Text(
         "PLAY",
@@ -294,7 +294,7 @@ class _SlotMachineState extends State<SlotMachine> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 150),
+            SizedBox(height: 80),
             Center(child: SizedBox(height: 350, child: buildSlotMachine())),
             Center(
               child: SizedBox(height: 50, width: 150, child: buildPlayButton()),

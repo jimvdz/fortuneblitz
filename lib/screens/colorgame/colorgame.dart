@@ -238,7 +238,7 @@ class _ColorGameState extends State<ColorGame> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //start of color game container
-            SizedBox(height: 150),
+            SizedBox(height: 40),
             Text(
               "CHOOSE YOUR COLOR",
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -286,7 +286,7 @@ class _ColorGameState extends State<ColorGame> {
 
             SizedBox(
               width: 300,
-              height: 175,
+              height: 120,
               child: GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 2,
